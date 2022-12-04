@@ -1,0 +1,71 @@
+<odoo>
+
+        <record id="em_tree_view" model="ir.ui.view">
+        <field name="name">em.em.tree</field>
+        <field name="model">em.em</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="1" decoration-danger="birthDate == False" decoration-info="salary &gt; 1000 " >
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="address" />
+                <field name="salary"/>
+                <field name="birthDate"/>
+                <field name="Section"/>
+                <field name="Years_of_Experience"/>
+                <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="em_form_view" model="ir.ui.view">
+        <field name="name">em.em.form</field>
+        <field name="model">em.em</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="1" delete="1" edit="1">
+                <header>
+                    <button name="set_draft" string="set Draft" type="object" states="done"/>
+                    <button name="set_confirm" string="Confirming" type="object" states="draft"/>
+                    <button name="set_done" string="set Done" type="object" states="confirm" />
+
+
+                    <field name="state" widget="statusbar" />
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+
+                            <field name="name" attrs="{'readonly': [('state', '=', 'done')]}" />
+                            <field name="phone_number"  attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="address"  attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="salary" attrs="{'readonly': [('state', '=', 'done')]}"/>
+
+                        </group>
+                        <group>
+                            <field name="birthDate" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="Section" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="Years_of_Experience" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="image" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+
+
+       <record id="em_action" model="ir.actions.act_window">
+          <field name="name">em action</field>
+          <field name="res_model">em.em</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem id="em_main_menu" name = "Employee" parent="cars_main_menu" sequence="5" />
+    <menuitem id="em_submenu" name="em list" action="em_action" parent="em_main_menu"/>
+</odoo>

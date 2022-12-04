@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="drivers_tree_view" model="ir.ui.view">
+        <field name="name">drivers.drivers.tree</field>
+        <field name="model">drivers.drivers</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="1" decoration-danger="is_GL == False" decoration-info="salary &gt; 1000 " >
+                <field name="name"/>
+                <field name="age" />
+                <field name="birthDate"/>
+                <field name="address"/>
+                <field name="is_GL"/>
+                <field name="salary"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="drivers_form_view" model="ir.ui.view">
+        <field name="name">drivers.drivers.form</field>
+        <field name="model">drivers.drivers</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="1" delete="1" edit="1">
+                <header>
+                    <button name="test" string="Test button" type="object" />
+                    <button name="set_salary" string="salary button" type="object"/>
+                    <field name="state" widget="statusbar" />
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+
+                            <field name="name"/>
+                            <field name="age" />
+                            <field name="birthDate"/>
+                        </group>
+                        <group>
+
+                            <field name="address"/>
+                            <field name="is_GL"/>
+                            <field name="salary"/>
+                        </group>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="driver_action" model="ir.actions.act_window">
+        <field name="name">Driver action</field>
+        <field name="res_model">drivers.drivers</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="drivers_main_menu" name = "Drivers" parent="cars_main_menu" sequence="10"/>
+    <menuitem id="drivers_submenu" name="divers list" action="driver_action" parent="drivers_main_menu"/>
+</odoo>

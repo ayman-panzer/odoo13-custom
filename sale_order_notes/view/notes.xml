@@ -1,0 +1,82 @@
+<odoo>
+
+
+    <record id="sale_order_notes_tree_view" model="ir.ui.view">
+        <field name="name">sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="notes"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="set_draft" string="set Draft" type="object"/>
+
+            </xpath>
+
+            <field name="payment_term_id" position="after">
+                <field name="notes"/>
+                <field name="driver"/>
+
+
+
+            </field>
+        </field>
+    </record>
+
+    <!--    after - before - replace - inside -->
+
+    <!--    <record id="cars_form_view" model="ir.ui.view">-->
+    <!--        <field name="name">cars.cars.form</field>-->
+    <!--        <field name="model">cars.cars</field>-->
+    <!--        <field name="type">form</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form create="1" delete="1" edit="1">-->
+    <!--                <header>-->
+    <!--                    <button name="set_draft" string="set Draft" type="object" states="done"/>-->
+    <!--                    <button name="set_confirm" string="Confirming" type="object" states="draft"/>-->
+    <!--                    <button name="set_done" string="set Done" type="object" states="confirm" />-->
+    <!--                    <button name="set_heavy" string=" heavy vehicle" type="object"/>-->
+
+
+    <!--                    <field name="state" widget="statusbar" />-->
+    <!--                </header>-->
+
+    <!--                <sheet>-->
+    <!--                    <group>-->
+    <!--                        <group>-->
+
+    <!--                            <field name="name" attrs="{'readonly': [('state', '=', 'done')]}" />-->
+    <!--                            <field name="car_plate"  attrs="{'readonly': [('state', '=', 'done')]}"/>-->
+    <!--                            <field name="color"  attrs="{'readonly': [('state', '=', 'done')]}"/>-->
+    <!--                        </group>-->
+    <!--                        <group>-->
+
+    <!--                            <field name="car_load" attrs="{'readonly': [('state', '=', 'done')]}"/>-->
+    <!--                            <field name="heavy_vehicle" attrs="{'readonly': [('state', '=', 'done')]}"/>-->
+    <!--                        </group>-->
+    <!--                    </group>-->
+    <!--                </sheet>-->
+
+
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <!--    <record id="cars_action" model="ir.actions.act_window">-->
+    <!--        <field name="name">cars action</field>-->
+    <!--        <field name="res_model">cars.cars</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--    </record>-->
+
+    <!--    <menuitem id="cars_main_menu" name = "Cars" />-->
+    <!--    <menuitem id="cars_submenu" name="Cars list" action="cars_action" parent="cars_main_menu" sequence="2"/>-->
+</odoo>

@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="traffic_tree_view" model="ir.ui.view">
+        <field name="name">trafficlines.trafficlines.tree</field>
+        <field name="model">trafficlines.trafficlines</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree create="1" decoration-danger="Available == False" decoration-info="start_time &gt; 10 " >
+                <field name="traffic_lines"/>
+                <field name="driver" />
+                <field name="Available"/>
+                <field name="start_time" invisible="1" />
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="traffic_form_view" model="ir.ui.view">
+        <field name="name">trafficlines.trafficlines.form</field>
+        <field name="model">trafficlines.trafficlines</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form create="1" delete="1" edit="1">
+                <header>
+                    <button name="set_draft" string="set Draft" type="object" states="done"/>
+                    <button name="set_confirm" string="Confirming" type="object" states="draft"/>
+                    <button name="set_done" string="set Done" type="object" states="confirm" />
+
+
+                    <field name="state" widget="statusbar" />
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+
+                            <field name="traffic_lines" attrs="{'readonly': [('state', '=', 'done')]}" />
+                            <field name="start_time"  attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="end_time"  attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                        <group>
+
+                            <field name="Available" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                            <field name="driver" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="Trafficlines_action" model="ir.actions.act_window">
+        <field name="name">Trafficlines action</field>
+        <field name="res_model">trafficlines.trafficlines</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="Trafficlines_main_menu" name = "Trafficlines" parent="cars_main_menu" sequence="15" />
+    <menuitem id="Trafficlines_submenu" name="Trafficlines list" action="Trafficlines_action" parent="Trafficlines_main_menu"/>
+</odoo>
